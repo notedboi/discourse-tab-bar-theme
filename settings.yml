@@ -28,6 +28,26 @@ tab_5_settings:
 tab_6_settings:
   default: "Notifications, comment, userNotifications, false"
 
+non_login_tab_1_settings:
+  default: "Home, home, /"
+  description:
+    en: "Display for non-login users. Format is: <code>&lt;title&gt;, &lt;FA5 icon&gt;, &lt;relative url or route name&gt;, &lt;enabled? default true (optional)&gt;</code>"
+
+non_login_tab_2_settings:
+  default: "Tag, tags, /tags"
+
+non_login_tab_3_settings:
+  default: "Group, users, /g "
+
+non_login_tab_4_settings:
+  default: ""
+
+non_login_tab_5_settings:
+  default: ""
+
+non_login_tab_6_settings:
+  default: ""
+
 extend_fa5_icons:
   type: list
   default: ""

@@ -46,15 +46,29 @@ export default {
       const site = api.container.lookup("site:main");
       if (!site.mobileView) return;
       const tabs = [];
+      const user = api.getCurrentUser();
+      const tabList = [];
+      if(user){
+        tabList.push(
+          settings.tab_1_settings,
+          settings.tab_2_settings,
+          settings.tab_3_settings,
+          settings.tab_4_settings,
+          settings.tab_5_settings,
+          settings.tab_6_settings,
+    )
+      } else {
+        tabList.push(
+            settings.non_login_tab_1_settings,
+            settings.non_login_tab_2_settings,
+            settings.non_login_tab_3_settings,
+            settings.non_login_tab_4_settings,
+            settings.non_login_tab_5_settings,
+            settings.non_login_tab_6_settings,
+        )
+      }
       const router = api.container.lookup("router:main");
-      [
-        settings.tab_1_settings,
-        settings.tab_2_settings,
-        settings.tab_3_settings,
-        settings.tab_4_settings,
-        settings.tab_5_settings,
-        settings.tab_6_settings,
-      ].forEach((setting) => {
+      tabList.forEach((setting) => {
         const props = setting.split(",").map((s) => s.trim());
         if (props.length >= 3 && props[3] !== "false") {
           tabs.push({
@@ -65,9 +79,7 @@ export default {
         }
       });
 
-      const user = api.getCurrentUser();
       tabs.forEach((tab) => {
-        if (!user) return;
         if (tab.destination.indexOf("/") !== -1) return;
         // we need this to highlight tab when you navigate to
         // a subroute of a tab's route
@@ -112,9 +124,6 @@ export default {
       });
 
       api.registerConnectorClass("above-footer", "d-tab-bar", {
-        shouldRender() {
-          return !Ember.isEmpty(user);
-        },
 
         setupComponent() {
           let lastScrollTop = 0;
